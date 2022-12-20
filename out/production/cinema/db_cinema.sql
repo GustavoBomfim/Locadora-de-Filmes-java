@@ -29,9 +29,3 @@ FOREIGN KEY(fk_cpf) REFERENCES CLIENTE(cpf),
 FOREIGN KEY (fk_id) REFERENCES FILME(id)
 );
 DROP TABLE ALUGUEL;
-
-INSERT INTO FILME(nome, genero, ator_principal, duracao, diretor) values ('Velozes e Furiosos', 'Acao','Dominique Toreto', 'Quentin Tarantino');
-
-INSERT INTO FILME(nome, genero, ator_principal, duracao, diretor) values ('Velozes e Furiosos 2', 'Acao','Dominique Toreto', '02:30:40', 'Quentin Tarantino');
-
-SELECT * FROM FILME;
