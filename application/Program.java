@@ -1,94 +1,63 @@
 package application;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class Program {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ParseException, IOException {
+
+        Scanner sc = new Scanner(System.in);
+
+        // CAPTAR OS INPUTS DOS USUÁRIOS
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        // conexao com o banco de dados mysql
         Connection connection = DriverManager
                 .getConnection("jdbc:mysql://localhost/cinema?useTimeZone=true&serverTimeZone=UTC", "root", "password");
 
-        System.out.println("Hello World!");
-        System.out.println("connection successful");
+        int option = 3;
+        while (option != 0) {
+            option = 3;
+            System.out.println("");
+            System.out.println("OLÁ, SEJA BEM VINDO À LOCADORA ciNEMO \n");
+            System.out.println("Menu de opções: \n 1 - Listar filmes \n 2 - Cadastrar um Filme \n 0 - Sair");
+            option = sc.nextInt();
 
-        Listagem listagem = new Listagem();
-        listagem.listar(connection);
+            if (option == 1) {
+                Listagem listagem = new Listagem();
+                listagem.listar(connection);
+            } else if (option == 2) {         //String nome = sc.nextLine();
+                Inserir inserir = new Inserir();
+                System.out.print("Cadastre o nome do filme: ");
+                String nome = reader.readLine();
 
-        inserir(connection);
+                System.out.print("Cadastre o genero do filme: ");
+                String genero = reader.readLine();
 
-        //Receber inputs do usuário
-        /*Scanner sc = new Scanner(System.in);
+                System.out.print("Cadastre a duração do filme: ");
+                String s = sc.next();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                long ms = sdf.parse(s).getTime();
+                Time duracao = new Time(ms);
 
-        System.out.print("Cadastre o nome do filme: ");
-        String nome = sc.next();
+                System.out.print("Cadastre o ator principal do filme: ");
+                String ator_principal = reader.readLine();
 
-        System.out.print("Cadastre o genero do filme: ");
-        String genero = sc.next();
+                System.out.print("Cadastre o diretor do filme: ");
+                String diretor = reader.readLine();
 
-        System.out.print("Cadastre o ator principal do filme: ");
-        String ator_principal = sc.next();
+                inserir.inserirNoBanco(connection, nome, genero, duracao, ator_principal, diretor);
+            }
 
-        System.out.print("Cadastre o diretor do filme: ");
-        String diretor = sc.next();
 
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO FILME (nome, genero, ator_principal, diretor) VALUES (?,?,?, ?)",
-                Statement.RETURN_GENERATED_KEYS);
-
-        preparedStatement.setString(1, nome);
-        preparedStatement.setString(2, genero);
-        preparedStatement.setString(3, ator_principal);
-        preparedStatement.setString(4, diretor);
-
-        preparedStatement.execute();
-        ResultSet resultSet = preparedStatement.getGeneratedKeys();
-        while(resultSet.next()){
-            Integer id = resultSet.getInt(1);
-            System.out.println("O id criado foi " + id);
         }
-
-         */
-
-
-
-
         connection.close();
+        reader.close();
+        sc.close();
     }
-
-
-    public static void inserir(Connection connection) throws SQLException{
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Cadastre o nome do filme: ");
-        String nome = sc.next();
-
-        sc.next();
-        System.out.print("Cadastre o genero do filme: ");
-        String genero = sc.next();
-
-        sc.next();
-        System.out.print("Cadastre o ator principal do filme: ");
-        String ator_principal = sc.next();
-
-        sc.next();
-        System.out.print("Cadastre o diretor do filme: ");
-        String diretor = sc.next();
-
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO FILME (nome, genero, ator_principal, diretor) VALUES (?,?,?, ?)",
-                Statement.RETURN_GENERATED_KEYS);
-
-        preparedStatement.setString(1, nome);
-        preparedStatement.setString(2, genero);
-        preparedStatement.setString(3, ator_principal);
-        preparedStatement.setString(4, diretor);
-
-        preparedStatement.execute();
-        ResultSet resultSet = preparedStatement.getGeneratedKeys();
-        while(resultSet.next()){
-            Integer id = resultSet.getInt(1);
-            System.out.println("O id criado foi " + id);
-        }
-
-    }
-
-
 }
