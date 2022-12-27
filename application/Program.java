@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Program {
@@ -20,12 +21,12 @@ public class Program {
         Connection connection = DriverManager
                 .getConnection("jdbc:mysql://localhost/cinema?useTimeZone=true&serverTimeZone=UTC", "root", "password");
 
-        int option = 3;
+        int option = 10;
         while (option != 0) {
-            option = 3;
+            option = 10;
             System.out.println("");
             System.out.println("OLÁ, SEJA BEM VINDO À LOCADORA ciNEMO \n");
-            System.out.println("Menu de opções: \n 1 - Listar filmes \n 2 - Cadastrar um Filme \n 3 - Cadastrar cliente \n 0 - Sair");
+            System.out.println("Menu de opções: \n 1 - Listar filmes \n 2 - Cadastrar um Filme \n 3 - Cadastrar cliente \n 4 - Alugar filme \n 0 - Sair");
             option = sc.nextInt();
 
             if (option == 1) {
@@ -65,6 +66,26 @@ public class Program {
                 Date nascimento = Date.valueOf(reader.readLine());
 
                 cliente.cadastrarCliente(connection, nome, cpf, nascimento);
+
+            }
+            else if(option == 4){
+                Aluguel aluguel = new Aluguel();
+                LocalDate now = LocalDate.now();
+                System.out.println("Data do aluguel: " + now);
+
+                System.out.print("Insira data da devolução (ano-mes-dia): ");
+                Date devolucao = Date.valueOf(reader.readLine());
+
+                System.out.print("Digite o cpf do cliente: ");
+                String cpf = reader.readLine();
+
+                System.out.println("Digite o id do filme: ");
+                int id = Integer.parseInt(reader.readLine());
+
+
+
+
+                aluguel.alugarFilme(connection, Date.valueOf(now), devolucao, cpf, id );
 
             }
 
