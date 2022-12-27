@@ -5,7 +5,7 @@ import java.sql.*;
 public class Inserir {
 
     public void inserirNoBanco(Connection connection, String nome, String genero, Time duracao, String ator_principal, String diretor) throws SQLException{
-        
+
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO FILME (nome, genero, duracao, ator_principal, diretor) VALUES (?,?,?, ?,?)",
                 Statement.RETURN_GENERATED_KEYS);
 

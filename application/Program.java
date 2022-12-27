@@ -25,7 +25,7 @@ public class Program {
             option = 3;
             System.out.println("");
             System.out.println("OLÁ, SEJA BEM VINDO À LOCADORA ciNEMO \n");
-            System.out.println("Menu de opções: \n 1 - Listar filmes \n 2 - Cadastrar um Filme \n 0 - Sair");
+            System.out.println("Menu de opções: \n 1 - Listar filmes \n 2 - Cadastrar um Filme \n 3 - Cadastrar cliente \n 0 - Sair");
             option = sc.nextInt();
 
             if (option == 1) {
@@ -52,6 +52,20 @@ public class Program {
                 String diretor = reader.readLine();
 
                 inserir.inserirNoBanco(connection, nome, genero, duracao, ator_principal, diretor);
+            }
+            else if (option == 3){
+                Cliente cliente = new Cliente();
+                System.out.print("Cadastre o nome do cliente: ");
+                String nome = reader.readLine();
+
+                System.out.print("Cadastre o CPF do cliente: ");
+                String cpf = reader.readLine();
+
+                System.out.print("Cadastre a data de nascimento no formato (ano-mes-dia): ");
+                Date nascimento = Date.valueOf(reader.readLine());
+
+                cliente.cadastrarCliente(connection, nome, cpf, nascimento);
+
             }
 
 
