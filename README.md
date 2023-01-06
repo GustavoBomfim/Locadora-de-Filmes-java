@@ -1,7 +1,7 @@
-# 🎬 Sistema de Locadora de Filmes
+# 🎬 Sistema para Locadora de Filmes
 
 ## 📼 Projeto: 
-  Foi realizado um levantamento de requisitos para entender as necessidades de um sistema para locadora. Em seguida, um banco de dados no MySQL para armazebar as informações e depois a implementação de uma lógica, em Java, para tratar os dados.
+  Foi realizado um levantamento de requisitos para entender as necessidades de um sistema para locadora. Em seguida, um banco de dados no MySQL para armazenar as informações e depois a implementação de uma lógica, em Java, para tratar os dados.
 
 ### 💡 Funcionalidades: 
   <ul>
