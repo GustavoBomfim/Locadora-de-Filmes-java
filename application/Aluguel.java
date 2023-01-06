@@ -28,4 +28,14 @@ public class Aluguel {
          */
 
     }
+
+    public void devolverFilme (Connection connection, int id, Date devolvido_em) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ALUGUEL SET devolucao_pendente = 0, devolvido_em = ? WHERE id = ?",
+                Statement.RETURN_GENERATED_KEYS);
+
+        preparedStatement.setDate(1, devolvido_em);
+        preparedStatement.setInt(2, id);
+
+        preparedStatement.execute();
+    }
 }

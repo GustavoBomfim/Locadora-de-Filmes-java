@@ -26,7 +26,8 @@ public class Program {
             option = 10;
             System.out.println("");
             System.out.println("OLÁ, SEJA BEM VINDO À LOCADORA ciNEMO \n");
-            System.out.println("Menu de opções: \n 1 - Listar filmes \n 2 - Cadastrar um Filme \n 3 - Cadastrar cliente \n 4 - Alugar filme \n 0 - Sair");
+            System.out.println("Menu de opções: \n 1 - Listar filmes \n 2 - Cadastrar um Filme \n 3 - Cadastrar cliente \n 4 - Alugar filme \n" +
+                    " 5 - Devolver Filme \n 0 - Sair");
             option = sc.nextInt();
 
             if (option == 1) {
@@ -82,11 +83,20 @@ public class Program {
                 System.out.println("Digite o id do filme: ");
                 int id = Integer.parseInt(reader.readLine());
 
-
-
-
                 aluguel.alugarFilme(connection, Date.valueOf(now), devolucao, cpf, id );
 
+            }
+            else if(option == 5){
+                Aluguel aluguel = new Aluguel();
+                LocalDate now = LocalDate.now();
+                System.out.println("Data real da devolução: " + now);
+
+                System.out.print("Digite o ID do aluguel ");
+                int id = Integer.parseInt(reader.readLine());
+
+                aluguel.devolverFilme(connection, id, Date.valueOf(now));
+
+                System.out.println("\nFilme devolvido com sucesso! ");
             }
 
 
